@@ -26,7 +26,7 @@ app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=1)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 jwt = JWTManager(app)
-CORS(app)
+CORS(app, origins=["https://networkhub-frontend.vercel.app"], supports_credentials=True)
 
 # MongoDB connection
 MONGODB_URI = os.getenv('MONGODB_URI', 'mongodb://localhost:27017/')
