@@ -26,7 +26,7 @@ app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=1)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 jwt = JWTManager(app)
-CORS(app, origins=["*"])  # Update with your frontend URL in production
+CORS(app, origins=[os.getenv('ALLOWED_ORIGINS', '*')])
 
 # MongoDB connection
 MONGODB_URI = os.getenv('MONGODB_URI', 'mongodb://localhost:27017/')
