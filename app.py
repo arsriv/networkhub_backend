@@ -187,7 +187,7 @@ def verify_otp():
 @app.route('/api/login', methods=['POST','OPTIONS'])
 def login():
      if request.method == "OPTIONS":
-        return '', 200  
+          return '', 200  
     """User login"""
     data = request.get_json()
     
