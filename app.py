@@ -186,11 +186,11 @@ def verify_otp():
 
 @app.route('/api/login', methods=['POST','OPTIONS'])
 def login():
-     if request.method == "OPTIONS":
-          return '', 200  
-    """User login"""
+    if request.method == "OPTIONS":
+        return '', 200
+                      
     data = request.get_json()
-    
+                       
     if 'email' not in data or 'password' not in data:
         return jsonify({'error': 'Email and password are required'}), 400
     
