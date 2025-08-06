@@ -26,7 +26,11 @@ app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=1)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 jwt = JWTManager(app)
-CORS(app, supports_credentials=True, origins=["https://networkhub-frontend.vercel.app"])
+CORS(app,
+     supports_credentials=True,
+     origins=["https://networkhub-frontend.vercel.app"],
+     methods=["GET", "POST", "OPTIONS"],
+     allow_headers=["Content-Type", "Authorization"])
 
 # MongoDB connection
 MONGODB_URI = os.getenv('MONGODB_URI', 'mongodb://localhost:27017/')
@@ -180,8 +184,10 @@ def verify_otp():
         }
     }), 201
 
-@app.route('/api/login', methods=['POST'])
+@app.route('/api/login', methods=['POST','OPTIONS'])
 def login():
+     if request.method == "OPTIONS":
+        return '', 200  
     """User login"""
     data = request.get_json()
     
